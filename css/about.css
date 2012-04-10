@@ -1,0 +1,85 @@
+
+html,body {
+    background-color: #fefefe;
+}
+
+.banner {
+    background-color: #5E2808;
+
+    font-family: 'Nunito', sans-serif;
+    font-size: 30px;
+    font-weight:bold;
+    
+    padding: 20px 20px 10px 20px;
+}
+
+.banner .circa {
+    color: #BCEEF5;
+}
+
+.banner .tagline {
+    color: #E4F5BC;
+}
+
+.left_bar {
+    width: 200px;
+    background-color: #BCEEF5;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.left_bar p {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.left_bar a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+
+.left_bar .divider {
+    margin: 3px 3px 3px 3px;
+    padding: 3px 3px 3px 3px;
+    background-color: #fff;
+}
+
+.content {
+    position: absolute;
+    left: 240px;
+    top: 80px;
+    max-width:700px;
+
+    color:#582113;
+    background-color:#D2EB99;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight:600;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+.content h1, .content h2, .content h3 {
+    color:#5E2808;
+    font-family: 'Hammersmith One', sans-serif;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+.content h1 {
+    background-color:#ABD93F;
+    padding: 5px 5px 0px 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.content h2 {
+    margin-top: 20px;
+}
+
+.content p {
+    margin: 5px 0px 5px 0px;
+    padding: 5px 0px 5px 0px;
+}
