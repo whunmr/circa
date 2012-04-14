@@ -3,9 +3,10 @@ title: "Quick Syntax Guide"
 description: ""
 layout: about
 author: Andrew Fischer
+date: 4-13-2012
 ---
 
-A quick guide to Circa's syntax.
+A quick tour of Circa's syntax.
 
 ## Expressions
 
@@ -28,7 +29,7 @@ Infix expressions are supported with C-like precedence.
     # this is also a comment
 
 Currently we support both `--` and `#` to start a line-wise comment. In the future we'll
-probably just pick one option.
+just pick one option.
 
 ## Color literals
 
@@ -73,8 +74,7 @@ Commas are optional when seperating arguments.
 
 We like to think about code in terms of data-flow,
 so the -> syntax is an alternative way to make a function call.
-The inputs are on the left and the function name is on the right. The above example
-is exactly equivalent to `print(msg)`
+The above example is exactly equivalent to `print(msg)`
 
 ## Name bindings
 
@@ -87,12 +87,12 @@ keyword in front of new name bindings, to avoid problems caused by misspelled na
 
 ## Lists
 
+Literal lists are written with brackets. Commas are optional when separating elements
+inside a literal list.
+
     ['Apple', 'Banana', 'Coffee']
     numbers = [1 2 3 4]
     rotated_point = [cos(r) sin(r)] * p
-
-Literal lists are written with brackets. Commas are optional when separating elements
-inside a literal list.
 
 Accessing the elements of the list uses the traditional `[]` syntax. Indices are 0 based.
 
@@ -106,19 +106,19 @@ Functions are defined with the `def` keyword. Function names are lower-case by c
     def sum(int a, int b, int c) -> int
         return a + b + c
 
-Each argument must have a declared type
-(Future: we might remove this requirement). The declared type can be `any`, for
+Each argument must have a declared type. The declared type can be `any`, for
 runtime typing. The function's return type is after the `->`.
-
-Significant indentation is used to indicate the function's contents.
 
 The function's output
 is given with the `return` keyword. (Future: we might just use the function's final
-expression as the return value).
+expression as the return value, as in Ruby).
 
-Instead of significant indentation, you can put braces around the function's contents.
+Significant indentation is used to indicate the function's contents.
+Alternatively, instead of significant indentation, you can put braces around the function's contents.
 Brace syntax is good for writing a one-liner,
 or if you don't like significant indentation.
+
+
 
     def sum(int a, int b) -> int { return a + b }
 
@@ -278,7 +278,6 @@ We can also declare methods on our new type.
 
 ## State
 
-So far, we've only covered features that do pure, stateless evaluation.
 The `state` keyword declares a value that should be preserved across evaluations.
 
     state int a = 1
@@ -291,7 +290,6 @@ Declaring an initial value is also optional:
 
     state a
 
-The right hand side may be an expression, this expression is only
-evaluated when needed.
+The right hand side may be an initialization expression:
 
     state a = one_time_expression()

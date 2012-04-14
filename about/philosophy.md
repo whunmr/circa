@@ -12,27 +12,25 @@ Every good language needs a philosophy, and here is ours.
 
 ### By making easy things trivial, we make nearly-impossible things merely hard
 
-Lots of features in Circa could be accused of being a whole lot of (our) work for a small
-amount of gain. But every little distraction that we can remove means that the coder
-can give slightly more attention to the real problems.
+We go to great lengths to save the user from doing tasks that would only take
+them a few extra seconds. But, each distraction we can remove gives the user more
+attention for the real problems.
 
 ### Code is mutable data.
 
-Even source text files are fair game to be modified by the system.
+Even source text files are fair game to be modified by the system. In a sane way, of course.
 
-### Always know where values came from.
+### Evaluations should be repeatable and understandable
 
-In order to accomplish many of the features we want, such as modifying anything at runtime,
-and results-based feedback, we need to know how each value was generated. This means
-that the system should retain information about data-flow, and it should discourage or eliminate
-mutable state.
+The system should retain data-flow information, so that we can properly react to arbitrary
+runtime changes. Any evaluation that is non-repeatable is a potential problem.
 
 ### Limiting the language is good.
 
 By limiting the language we mean discouraging extra layers of expression, like
 inheritance, generic types, or arbitrary control flow. A limited language is
 easier to statically reason about, this makes introspection and reflection drastically
-easier. Turing-completeness is overrated.
+easier. Turing-completeness is overrated!
 
 ### Tooling and reflection can help overcome the problems of a limited language.
 
@@ -42,4 +40,6 @@ make it easier to create code with the available language.
 ### Minimize the need for planning.
 
 Too often, software is like architecture, where the whole thing must be thrown away
-if the foundations are built incorrectly.
+if the foundations are built incorrectly. This causes the coder to hesitate before putting
+new ideas into code. We prefer an environment where the author
+can write code with abandon, and fix any problems later.
