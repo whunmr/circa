@@ -1,14 +1,13 @@
 ---
 title: "Inlined State"
 description: ""
-layout: article
+layout: about
 author: Andrew Fischer
 date: 4-14-2012
 ---
 
-
+<h1>Inlined state in Circa</h1>
 <div class="article_credit">written April 14, 2012 - Andrew Fischer</div>
-
 
 Inlined state is one of my favorite features
 in Circa, because it started out as a pragmatic solution to a problem and
