@@ -299,7 +299,7 @@ mouse is hovering over. Here's an initial example:
     def draw_button(Rect box)
         normal_color = #f00
         hover_color = #f88
-        color = if mouse_over(box) { normal_color } else { hover_color }
+        color = if mouse_over(box) { hover_color } else { normal_color }
         fill_rect(box, color)
 
 With this code, the button will immediately switch between red and pink as the
@@ -314,10 +314,10 @@ First we'll change the code to use a scalar when switching between colors.
         fill_rect(box, color)
 
 There's no change in functionality here, we've just added some math. The `interp` function returns
-the first argument (`#f00`) if `highlight` is 1.0 and it returns the second one (`#f88`)
-if highlight is 0.0. The `interp` function also smoothly interpolates if the number is somewhere between 0.0 and 1.0, which is a feature we're about to use.
+the first argument (`#f00`) if `highlight` is 0.0 and it returns the second one (`#f88`)
+if highlight is 1.0. The `interp` function also smoothly interpolates if the number is somewhere between 0.0 and 1.0, which is a feature we're about to use.
 
-Now some magic happens, we'll add one more line to make it a smooth transition.
+Now the magic happens, we'll add one more line to make it a smooth transition.
 
     def draw_button(Rect box)
         highlight = if mouse_over(box) { 1.0 } else { 0.0 }
@@ -327,9 +327,12 @@ Now some magic happens, we'll add one more line to make it a smooth transition.
 
 The `approach_over_time` function is stateful (and now, `draw_button` is stateful too).
 The `approach_over_time` function internally keeps a 'current' value,
-and over time, the return value gradually approaches the target value. So the end 
-result is that our color fades in as the mouse hovers, it fades out when the mouse leaves,
-and if the user waves their mouse
+and over time, its output value gradually approaches the target value. So, we start out
+with `highlight` equal to 0.0. Then the mouse hovers over the box. Our "target" (the
+value we pass to `approach_over_time` is now 1.0). But the return value won't be 1.0
+yet, first it might return 0.1, then 0.2, etc. The end result is that the color slowly
+fades in to what it should be - if the mouse is hovering then it fades to pink, if
+the mouse is gone then it fades to red. If the user waves their mouse
 over the button repeatedly, it handles that too.
 
 If you're interested, here's what `approach_over_time` looks like:
@@ -343,12 +346,36 @@ If you're interested, here's what `approach_over_time` looks like:
             current -= min(maximum_change, current - target)
         return current
 
-But the point is that we don't need to care what's inside `approach_over_time`.
+But, the point is that we don't need to care what's inside `approach_over_time`.
 We have *encapsulation*, where we don't need to care about the details of the
 function, just the inputs and outputs.
 The code that uses our `draw_button` function also doesn't need to care that
 we have added state. We can call `draw_button` several times
 and it will behave correctly.
+
+With this tool in our arsenal, we can easily define all sorts of useful stateful
+functions. Some examples:
+
+    def once() -> bool
+        "Returns true the first time it's called, and false thereafter"
+        state bool s = true
+        result = s
+        s = false
+        return result
+
+    def toggle(bool tog) -> bool
+        """
+        Stateful function, returns a boolean status. Every frame the function is called
+        with (true), the result flips. Starts out false.
+        """
+        state bool s = false
+        if tog { s = not(s) }
+        return s
+
+    def seed() -> number
+        "Returns a random number 0..1 which doesn't change after initialization"
+        state number s = rand()
+        return s
 
 ### Looking at inlined state as a code transformation
 
