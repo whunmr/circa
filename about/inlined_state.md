@@ -1,10 +1,9 @@
 ---
 title: "Inlined State"
-title2: "Inlined State in Circa"
 description: ""
 layout: article
 author: Andrew Fischer
-date: 4-13-2012
+date: 4-14-2012
 ---
 
 
@@ -262,7 +261,7 @@ Here are some examples of where state migration will fail:
                         State:
                       {'a': 123}
 
-*The user probably just renamed 'a' to 'b', but we only consider names, so this state will be thrown out*
+*The user probably just renamed 'a' to 'b', but we only consider names, so this state will be thrown out.*
 <p style="height:40px"></p>
 
     Old code                           New code
@@ -274,21 +273,21 @@ Here are some examples of where state migration will fail:
                         State:
                       {'_if': ['a': 123]}
 
-*The user probably moved 'a' from inside the if-block to outside it, but we don't handle state moving across branches."
+*The user probably moved 'a' from inside the if-block to outside it, but we don't handle state moving across branches.*
 
 ### Last thoughts on state migration
 
-So on paper it looks like our strategy has some flaws, but in practice, the system works great.
+On paper it looks like our strategy has some flaws, but in practice, the system works great.
 Roughly 90% of our code changes are: appending new code to the bottom of the
 file, appending new state variables, and modifying and tweaking existing code (without touching
 state declarations). These changes can be handled by our system just fine.
 
-For the rare occasions where the user does redefine existing state, we do have options:
- * In some cases, it's okay to throw out existing state
- * If this isn't okay, the user might restrict themselves to changes that they know will
+For the occasions where the user does redefine state in a way that automatic migration will fail, we do have options:
+ * Depending on what the state is for, it might be okay to throw it out
+ * The user can restrict themselves to changes that they know will
    preserve state. (our name-based
    migration is very predictable in terms of when it will succeed or fail).
- * Finally, we can allow for structured modifications
+ * Finally, we can allow for structured modifications. The code change will be performed within the system, so the system will know how to migrate state.
 
 ### Faster coding with inlined state
 
@@ -308,16 +307,16 @@ With this code, the button will immediately switch between red and pink as the
 mouse hovers over. But, we want things to look nice and smooth, so we want the color to smoothly
 transition between red and pink.
 
-First we'll change the code to use a scalar to switch between colors.
+First we'll change the code to use a scalar when switching between colors.
 
     def draw_button(Rect box)
         highlight = if mouse_over(box) { 1.0 } else { 0.0 }
         color = interp(highlight #f00 #f88)
         fill_rect(box, color)
 
-No change in functionality here, we've just added some math. The `interp` function returns
+There's no change in functionality here, we've just added some math. The `interp` function returns
 the first argument (`#f00`) if `highlight` is 1.0 and it returns the second one (`#f88`)
-if highlight is 0.0. The `interp` function also smoothly interpolates if the number is somewhere between 0.0 and 1.0.
+if highlight is 0.0. The `interp` function also smoothly interpolates if the number is somewhere between 0.0 and 1.0, which is a feature we're about to use.
 
 Now some magic happens, we'll add one more line to make it a smooth transition.
 
@@ -330,7 +329,8 @@ Now some magic happens, we'll add one more line to make it a smooth transition.
 The `approach_over_time` function is stateful (and now, `draw_button` is stateful too).
 The `approach_over_time` function internally keeps a 'current' value,
 and over time, the return value gradually approaches the target value. So the end 
-result is that our color fades in, it fades out, and if the user waves their mouse
+result is that our color fades in as the mouse hovers, it fades out when the mouse leaves,
+and if the user waves their mouse
 over the button repeatedly, it handles that too.
 
 If you're interested, here's what `approach_over_time` looks like:
@@ -355,11 +355,12 @@ and it will behave correctly.
 
 This article is getting long, so here's the last section.
 One way to think of inlined state is to
-look it as a code transformation (which, in Circa, it is). We can transform
-a stateful function to a stateless function by adding an additional input and output.
+look it as a code transformation. We can transform
+a stateful function to a stateless function by adding an additional input and output
+(this transformation is what Circa actually does internally).
 
 Let's use our `draw_button` example. We'll change it to also return the color, just
-because this example is more interesting if the function has an output. Our starting code:
+because this example is more interesting if the function has an output. Here's our starting code:
 
     def draw_button(Rect box) -> Color
         highlight = if mouse_over(box) { 1.0 } else { 0.0 }
@@ -368,7 +369,9 @@ because this example is more interesting if the function has an output. Our star
         fill_rect(box, color)
         return color
 
-Here it is as a stateless function, using multiple return values.
+Here it is as a stateless function, using multiple return values. The state variable
+for the `approach_over_time` variable is unpacked (possibly created), then packed and
+included in the return variable.
 
     def draw_button(Dict state, Rect box) -> (Color, Dict)
         highlight = if mouse_over(box) { 1.0 } else { 0.0 }
