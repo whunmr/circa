@@ -33,6 +33,7 @@ The public C api is almost complete.
 ## Known issues in the core language
 <ul>
 <li>Garbage collection is disabled, so GCed objects are never collected. (the good news is that not all types are GCed)</li>
+<li>Type inferrence is lacking, especially around container types. Generally, every time you access a list element, you need a manual cast to the expected type. </li>
 <li>API and libraries are still in progress.</li>
 <li>Performance problems in the interpreter (such as one malloc per function call)</li>
 <li>Only one instance of the core library can exist per process (due to use of globals)</li>
