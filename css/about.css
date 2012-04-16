@@ -75,7 +75,7 @@ html,body {
     margin: 10px 10px 10px 10px;
     padding: 10px 10px 10px 10px;
 
-    border-style: outset;
+    border-style: solid;
     border-width: 3px;
     border-color: #B4EB6F;
 }
