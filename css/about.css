@@ -66,7 +66,7 @@ html,body {
     top: 80px;
     max-width:900px;
 
-    color:#582113;
+    color:#391F18;
     background-color:#EBFBDF;
 
     font-family: 'Open Sans', sans-serif;
@@ -76,8 +76,8 @@ html,body {
     padding: 10px 10px 10px 10px;
 
     border-style: outset;
-    border-width: 5px;
-    border-color: #9AEB60;
+    border-width: 3px;
+    border-color: #B4EB6F;
 }
 
 .content h1, .content h2, .content h3 {
