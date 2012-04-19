@@ -54,10 +54,13 @@ be saved back to source text with no loss of comments or whitespace.
 
 Here's a laundry list of design decisions:
 
- * Runtime typing with static type inferrence
+ * C-like code semantics
+ * Runtime typing with optional static type inferrence
  * Eager evaluation
- * Call-by-value
  * Values are immutable
+ * Code is stored as a data-flow graph
+ * Pluggable type system
+ * Written in C++
 
 ## Embeddable
 
