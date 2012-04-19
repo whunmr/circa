@@ -454,7 +454,7 @@ actually an object with one method. Here's what that might look like:
 
 # References
 
-<li>
-<ul><a href="http://perldoc.perl.org/perlsub.html#Persistent-Private-Variables">Persistent private variables in Perl 5</a></ul>
-<ul><a href="http://blog.lassus.se/files/liveprogramming.pdf">Describing Live programming using program transformations and a callstack explicit interpreter - Olov Johansson</a></ul>
-</li>
+<ul>
+<li><a href="http://perldoc.perl.org/perlsub.html#Persistent-Private-Variables">Persistent private variables in Perl 5</a></li>
+<li><a href="http://blog.lassus.se/files/liveprogramming.pdf"><i>Describing Live programming using program transformations and a callstack explicit interpreter</i> - Olov Johansson</a></li>
+</ul>
