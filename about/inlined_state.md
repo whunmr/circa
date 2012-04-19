@@ -11,13 +11,12 @@ date: 4-14-2012
 
 Inlined state is one of my favorite features
 in Circa, because it started out as a pragmatic solution to a problem and
-unexpectedly turned out to be a really fun and productive feature.
+unexpectedly turned out to be a really fun and highly productive feature.
 
 ### Motivation
 
-Let's first define the problem. In Circa, we support changes to source code at runtime,
-and we can divide up code changes
-into two categories:
+Let's first define the problem. In Circa, we support changes to source code at runtime.
+We can consider two categories of code changes:
 
  * *Structured* changes - Editing code at the AST level. The system understands each
    change, and it knows exactly how the old version relates to the new version.
@@ -32,13 +31,25 @@ into two categories:
 We want to support both changes, and we want to preserve the program's current state
 across each change.
 
-Preserving state across structured changes is definitely easier. In this article we're
-going to focus on the harder part, handling unstructured changes.
+Preserving state across structured changes definitely feels doable, depending on how
+complex the change operations are that we allow. In this article I'm only going to focus
+on handling *unstructured* changes. (For further reading about handling structured
+changes, Olov Johansson wrote a <a href="http://blog.lassus.se/files/liveprogramming.pdf">thesis</a>
+on solving the problem for Javascript.)
+
+There's one more caveat before we get started: this article doesn't talk about how
+to preserve the call stack across modification. In the current scheme, a block of code must
+run until completion before we can replace it with new code. We definitely want
+to also be able to preserve the call stack, this is necessary for code that blocks
+or has long-running loops. Call-stack migration is planned for the future.
+
+So anyway, the problem is to migrate state from one piece of Circa code to another,
+with no guarantees as to how the two pieces of code are related.
 
 ### Declaring state
 
-In order to preserve state, the system needs to know which values are stateful.
-So, we have the `state` keyword.
+We declare our stateful values with the `state` keyword. Since most Circa functions
+are pure, stateful values are our equivalent for mutable variables.
 
     state a = 1
     
@@ -48,18 +59,21 @@ last iteration.
     state total_connections = 0
     total_connections += count_new_connections()
 
-We refer to it as *inlined* state because the state is declared inline with the code.
+We refer to this as *inlined* state because the declarations are written
+inline with the code.
 
-The part after the equals sign in `state total_connections = 0` is the initializer.
-This expression is used if we don't already have a value for this variable (such as
-if this is the first time we've run the code, or if the state was deliberately reset).
+When declaring state we can optionally have an initializer expression, which is
+written on the right following an `=` sign.
+
+This expression is used if we don't already have a value for this variable (such as,
+if this is the first time we've run this code, or if the state was deliberately reset).
 
     -- Keep track the time elapsed
     state time_started = current_time()
     time_elapsed = time_started - current_time()
 
 So in this example we only assign `time_started` to `current_time()` once. From then
-on, we use `time_started` to find the delta of time elapsed.
+on, we remember the time_started value, and use it to compute the time elapsed.
 
 At any time, the interpreter knows what the state of the whole system is, and we can
 represent it as a dictionary with the variable names as keys.  In the above example, our
@@ -120,6 +134,9 @@ on for any functions that call `g`.
 The above code would result in the following state:
 
     {'h': {'g': {'f': {'a': 1}}}}
+
+When a term doesn't have its own name, we'll use the function's name in the state
+dictionary.
 
 We can also nest state inside control-flow blocks for some useful effects.
 
@@ -248,7 +265,7 @@ Examples:
                         State:
                  {'_if': [{'a': 1}]}
 
-*Added an 'else' condition. The first condition will use the existing state, and the 'else' condition will create new state.
+*Added an 'else' condition. The first condition will use the existing state, and the 'else' condition will create new state.*
 <p style="height:40px"></p>
 
 Here are some examples of where state migration will fail:
@@ -439,4 +456,5 @@ actually an object with one method. Here's what that might look like:
 
 <li>
 <ul><a href="http://perldoc.perl.org/perlsub.html#Persistent-Private-Variables">Persistent private variables in Perl 5</a></ul>
+<ul><a href="http://blog.lassus.se/files/liveprogramming.pdf">Describing Live programming using program transformations and a callstack explicit interpreter - Olov Johansson</a></ul>
 </li>

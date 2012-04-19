@@ -19,7 +19,8 @@ language of choice for the creative coder.
 # Current status
 
 It's important to note that Circa is currently alpha-level, and the implementation
-has known issues. Read about the <a href="/about/current_status.html">current status</a>.
+has known issues. There aren't any downloadable binaries ready yet, but we're working
+on that. Read more about the <a href="/about/current_status.html">current status</a>.
 
 # Features
 
@@ -69,3 +70,5 @@ Source is available on <a href="https://github.com/paulhodge/circa">Github</a>, 
 # Author
 
 This project is a labor of love by Andrew Fischer, who has written C++ for so many years that he never wants to stop to recompile ever again. Found on Github as <a href="https://github.com/paulhodge">paulhodge</a> and on Twitter as <a href="https://twitter.com/#!/hodgepaul">hodgepaul</a>.
+
+Logo designed by Kurt Schafer.

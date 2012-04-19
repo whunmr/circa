@@ -18,17 +18,18 @@ The command-line tool is feature complete; this tool can load & run a script fil
 
 ### Graphical environment
 
-The Qt-based GUI is in progress. This is intended to be a Processing-like tool that comes
+The Qt-based GUI is in progress, about 50% complete. This is intended to be a Processing-like tool that comes
 equipped with bindings for drawing, doing audio, and handling user input.
 
 ### Visual editor
 
 We want to have a tool (or many) that takes advantage of Circa's abilities to modify
-and introspect the system at runtime. This is in the early stages of development.
+and introspect the system at runtime. The user will be able to create and modify code without
+ever touching a text file. This one is very early in development.
 
 ### Embeddability
 
-The public C api is almost complete.
+The public C api is almost ready for a release, this will be released alongside the GUI tool.
 
 ## Known issues in the core language
 <ul>

@@ -82,8 +82,34 @@ The above example is exactly equivalent to `print(msg)`
     name = "Harry"
     harrys_age = get_person_age(name)
 
-A name binding may precede any expression. (Future: we might require the 'var'
-keyword in front of new name bindings, to avoid problems caused by misspelled names)
+A name binding may precede any expression. (Future: we might require `var` or `val`
+keyword in front of new names, to avoid problems caused by misspellings)
+
+## Rebinding operators
+
+Some infix operators will rebind the left-hand-side name, so that they behave like they would in C. Example:
+
+    -- this expression:
+    a += 2
+
+    -- does the same thing as:
+    a = a + 2
+
+The rebinding operators are `+=`, `-=`, `*=`, `/=`.
+
+## Name rebinding operator
+
+The `@` operator can be written in front of a name, this rebinds the name to the
+result of the overall statement.
+
+    add(@x, 1.0)
+
+    -- does the same thing as:
+    x = add(x, 1.0)
+
+The `@` symbol shows up in a few different ways in the language (see for-loops below).
+It always means that the given name is being rebound.
+
 
 ## Lists
 
@@ -117,8 +143,6 @@ Significant indentation is used to indicate the function's contents.
 Alternatively, instead of significant indentation, you can put braces around the function's contents.
 Brace syntax is good for writing a one-liner,
 or if you don't like significant indentation.
-
-
 
     def sum(int a, int b) -> int { return a + b }
 
@@ -175,8 +199,7 @@ The keywords `break` and `continue` can be used for flow control.
         print(x)
 
 The loop can also be used to rewrite the input list, if the `@` symbol
-precedes list name. (The `@` symbol shows in a few
-places, it always means "this name is being rebound by this statement"). Example:
+is added. Example:
 
     list = [1 2 3]
     for i in @list
@@ -194,17 +217,6 @@ When called, `discard` will `continue` and remove the current element from the o
 
     -- 'list' now equals [1, 3]
 
-## Rebinding operator
-
-Some infix operators will rebind the left-hand-side name. Example:
-
-    -- this expression:
-    a += 2
-
-    -- does the same thing as:
-    a = a + 2
-
-The rebinding operators are `+=`, `-=`, `*=`, `/=`.
 
 ## Typecasting
 
@@ -293,3 +305,17 @@ Declaring an initial value is also optional:
 The right hand side may be an initialization expression:
 
     state a = one_time_expression()
+
+## Namespaces
+
+A namespace is declared with the `namespace` keyword.
+
+    namespace myNamespace
+      def myFunc() -> int
+        return 1
+
+Namespaced names can be accessed with a colon-separated identifier.
+
+    myNamespace:myFunc()
+
+    
