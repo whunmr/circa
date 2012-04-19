@@ -27,8 +27,8 @@ runtime changes. Any evaluation that is non-repeatable is a potential problem.
 
 ### Limiting the language is good.
 
-By limiting the language we mean discouraging extra layers of expression, like
-inheritance, operator overloading, or arbitrary control flow. A limited language is
+By limiting the language we mean discouraging extra layers of expression,
+such as any tricky dynamic dispatch, or arbitrary control flow. A limited language is
 easier to statically reason about, this makes introspection and reflection drastically
 easier. Turing-completeness is overrated!
 
