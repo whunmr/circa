@@ -18,18 +18,23 @@ Simple values:
     true
     :some_name
 
-Infix expressions are supported with C-like precedence.
+Infix expressions are supported. with C-like precedence:
 
-    4 + 1
-    4 * 1 + 3
+    1 + 2 * 3 / 4
 
 ## Comments
 
-    -- this is a comment
-    # this is also a comment
+Single-line comments start with `--`.
 
-Currently we support both `--` and `#` to start a line-wise comment. In the future we'll
-just pick one option.
+    -- this is a comment
+
+Multiline comments start with `{-` and end with `-}`. These can be nested.
+
+    {-
+    this is a
+    multiline comment
+    {- with nested brackets -}
+    -}
 
 ## Color literals
 
@@ -40,19 +45,6 @@ same syntax as CSS.
     transparent_blue = #00f8
     international_orange = #ff4f00
 
-## Division
-
-The `/` operator always does floating-point division (it isn't affected by the 
-input types as in C).
-
-    a = 3 / 2
-    -- 'a' now equals 1.5
-
-For integer division, use the `//` operator.
-
-    a = 3 // 2
-    -- 'a' now equals 1
-
 ## Function calls
 
 Function calls are written with the function name followed by a parenthesized list.
@@ -60,7 +52,6 @@ The function name doesn't get to hang out inside the parenthesis because that wo
 be like the boss hanging out with the employees.
 
 Commas are optional when seperating arguments.
-
 
     func()
     print(msg)
@@ -70,11 +61,14 @@ Commas are optional when seperating arguments.
 
 ## Right-apply
 
+The -> syntax is an alternative way to make a function call, the inputs are on the left
+and the function is on the right. 
+
     msg -> print
 
-We like to think about code in terms of data-flow,
-so the -> syntax is an alternative way to make a function call.
-The above example is exactly equivalent to `print(msg)`
+    -- does the same thing as:
+    print(msg)
+
 
 ## Name bindings
 
@@ -108,8 +102,7 @@ result of the overall statement.
     x = add(x, 1.0)
 
 The `@` symbol shows up in a few different ways in the language (see for-loops below).
-It always means that the given name is being rebound.
-
+It always means that the given name is being rebound to a new value.
 
 ## Lists
 
