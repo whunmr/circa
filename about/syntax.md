@@ -48,9 +48,6 @@ same syntax as CSS.
 ## Function calls
 
 Function calls are written with the function name followed by a parenthesized list.
-The function name doesn't get to hang out inside the parenthesis because that would
-be like the boss hanging out with the employees.
-
 Commas are optional when seperating arguments.
 
     func()
