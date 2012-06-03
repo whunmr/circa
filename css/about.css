@@ -105,6 +105,10 @@ html,body {
     border-color: #B4EB6F;
 }
 
+.content strong {
+    font-weight: 800;
+}
+
 .content h1, .content h2, .content h3 {
     color:#5E2808;
     font-family: 'Hammersmith One', sans-serif;
