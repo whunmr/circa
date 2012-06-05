@@ -1,0 +1,81 @@
+
+html,body {
+    background-color: #ffffff;
+}
+
+.banner {
+    font-size: 40px;
+
+    position: absolute;
+    left: 50px;
+    top: 30px;
+    /* extend to right for the HR: */
+    right: 50px;
+
+    color: #00aa00;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.banner .circa {
+    /*
+    really thick font
+    green color
+    */
+
+    font-weight:800;
+}
+
+.banner .docs {
+    /* 
+    same green color
+    thin font
+    */
+    font-weight:200;
+}
+
+.left_bar {
+    position: absolute;
+    left: 50px;
+    top: 150px;
+
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.left_bar h1 {
+    /*
+     cheerful blue
+     bold
+    */
+
+    color: #3333ff;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.left_bar h3 {
+    /* grey */
+    color: #333333;
+    font-weight: 200;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.content {
+    /* dark grey */
+    color: #222222;
+    position: absolute;
+    left: 260px;
+    top: 150px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+
+.content h3 {
+    color: #332288;
+}
+
+code {
+    /* TODO- find a nicer fixed-width font*/
+    font-family: 'Courier';
+}
