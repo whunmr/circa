@@ -19,13 +19,14 @@ interesting tricks.
 
 **Improv** is a graphical code editor that is being developed alongside Circa. This tool
 takes advantage of Circa's unique features to create an interactive, visual environment
-for coding. Both are free.
+for coding.
 
 # Current status
 
-It's important to note that Circa and Improv are currently alpha-level, and are still
-in development. On the <a href="/about/download.html">Download</a> page you can find a list of features available in the
-latest build, and links to download Mac & Windows binaries.
+We're working hard on releasing an interactive tool that will showcase the language.
+There's no download available yet. Stay tuned and subscribe to
+<a href="https://groups.google.com/forum/?fromgroups#!forum/circa-announce">Circa-announce</a>
+if you'd like to be notified of updates.
 
 # Features
 
